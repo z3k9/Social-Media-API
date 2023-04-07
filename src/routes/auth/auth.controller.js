@@ -20,14 +20,13 @@ async function login(req,res){
 
 async function register(req,res){
     try{
-        const user = User.create(...req.body);
-        const token = User.createJWT();
+        const user = await User.create({...req.body});
+        const token = user.createJWT();
         res.status(201).json({ user: {name : user.name, email: user.email}, token});
         console.log(user);
     }
     catch(error){
         res.status(500).json({ msg : error});
-        console.error(err);
     }
 } 
 

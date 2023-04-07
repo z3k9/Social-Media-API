@@ -11,11 +11,13 @@ async function authenticationMiddleware(req,res,next){
 
     try{
         const payload = jwt.verify(token, process.env.JWT_SECRET);
-        const user = User.findById(payload.userId).select('-password');
+        const user = await User.findById(payload.userId).select('-password');
         req.user = user;
+        next();
     }
     catch(err){
         res.status(401).json({msg: 'no access to this route'});
-        console.error(err);
     }
 }
+
+module.exports = authenticationMiddleware;
