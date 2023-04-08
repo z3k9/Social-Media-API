@@ -2,9 +2,9 @@ const express = require('express');
 
 const blogRouter = express.Router();
 
-const { getBlogs, getABlog, createABlog, updateABlog, deleteBlog} = require('./blog.controller');
+const { getAllBlogs, getABlog, createABlog, updateABlog, deleteABlog} = require("./blog.controller");
 
-blogRouter.route('/').get(getBlogs).post(createABlog);
-blogRouter.route('/:id').get(getABlog).post(updateABlog).delete(deleteBlog);
+blogRouter.route('/').get(getAllBlogs).post(createABlog);
+blogRouter.route('/:id').get(getABlog).post(updateABlog).delete(deleteABlog);
 
 module.exports = blogRouter;
